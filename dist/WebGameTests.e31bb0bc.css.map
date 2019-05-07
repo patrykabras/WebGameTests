@@ -1,0 +1,1 @@
+{"version":3,"sources":["main.scss"],"names":[],"mappings":"AAEA;EACI;EACA;EACA,YALI","file":"WebGameTests.e31bb0bc.css","sourceRoot":"..","sourcesContent":["$color: rgb(15, 70, 223);\r\n\r\nbody{\r\n    width: 100vw;\r\n    margin: auto;\r\n    background: $color;\r\n}"]}
