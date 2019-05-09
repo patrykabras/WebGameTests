@@ -1,15 +1,16 @@
 import Phaser from 'phaser'
+import { updatePlayerPosition } from './player';
 
 class InputManager {
-    keys: { name: string; value: any; }[];
+    keys: { name: string; value: any; velocityX: number; velocityY: number }[];
     bindings: {};
-
+    SPEED: number = 60;
     constructor() {
         this.keys = [
-            { name: 'W', value: Phaser.Input.Keyboard.KeyCodes.W },
-            { name: 'S', value: Phaser.Input.Keyboard.KeyCodes.S },
-            { name: 'A', value: Phaser.Input.Keyboard.KeyCodes.A },
-            { name: 'D', value: Phaser.Input.Keyboard.KeyCodes.D },
+            { name: 'W', value: Phaser.Input.Keyboard.KeyCodes.W, velocityX: 0, velocityY: -this.SPEED },
+            { name: 'S', value: Phaser.Input.Keyboard.KeyCodes.S, velocityX: 0, velocityY: this.SPEED },
+            { name: 'A', value: Phaser.Input.Keyboard.KeyCodes.A, velocityX: -this.SPEED, velocityY: 0 },
+            { name: 'D', value: Phaser.Input.Keyboard.KeyCodes.D, velocityX: this.SPEED, velocityY: 0 },
         ];
     }
     setupListeners(game) {
@@ -19,7 +20,13 @@ class InputManager {
         })
     }
     handleUpdate() {
-
+        Object.keys(this.bindings).forEach(key => {
+            if (this.bindings[key].isDown) {
+                // console.log(key, this.bindings[key].isDown);
+                let currentKey = this.keys.find(({ name }) => name === key);
+                updatePlayerPosition(currentKey);
+            }
+        })
     }
 }
 
